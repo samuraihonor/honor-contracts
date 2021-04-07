@@ -25,7 +25,7 @@ const run = async () => {
   const pancakeFactoryContract = new web3.eth.Contract(factoryAbi, factoryAddress);
   const bep20Contract = new web3.eth.Contract(bep20Abi);
   const masterChefContract = new web3.eth.Contract(masterChefAbi);
-  const token1 = await bep20Contract.deploy({
+  const busdToken = await bep20Contract.deploy({
     data: bep20Bin,
     arguments: ['BUSD', 'BUSD']
   })
@@ -33,7 +33,7 @@ const run = async () => {
     from: address,
     gas: 2000000
   });
-  const token2 = await bep20Contract.deploy({
+  const honorToken = await bep20Contract.deploy({
     data: bep20Bin,
     arguments: ['HONOR', 'HONOR']
   })
@@ -41,23 +41,23 @@ const run = async () => {
     from: address,
     gas: 2000000
   });
-  const tokenAddress1 = token1.options.address;
-  const tokenAddress2 = token2.options.address;
+  const busdTokenAddress = busdToken.options.address;
+  const honorTokenAddress = honorToken.options.address;
   const masterChef = await masterChefContract.deploy({
     data: masterChefBin,
-    arguments: [tokenAddress2, address, '1000000000000000000', latestBlock]
+    arguments: [honorTokenAddress, address, '1000000000000000000', latestBlock]
   })
   .send({
     from: address,
-    gas: 2000000
+    gas: 3000000
   });
-  const tx = await pancakeFactoryContract.methods.createPair(tokenAddress1, tokenAddress2).send({
+  const tx = await pancakeFactoryContract.methods.createPair(busdTokenAddress, honorTokenAddress).send({
     from: address,
     gas: '2000000'
   });
   const tokenPoolAddress = tx.events.PairCreated.returnValues.pair;
   console.log(`master chef: ${masterChef.options.address}`);
-  console.log(`token1: ${tokenAddress1}\ntoken2: ${tokenAddress2}\ntoken pool: ${tokenPoolAddress}`)
+  console.log(`busdToken: ${busdTokenAddress}\ntoken2: ${honorTokenAddress}\ntoken pool: ${tokenPoolAddress}`)
 }
 
 const getContract = (contractName) => {
