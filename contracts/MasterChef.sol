@@ -7,7 +7,7 @@ import "./libs/IBEP20.sol";
 import "./libs/SafeBEP20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-import "./BlzdToken.sol";
+import "./HonorToken.sol";
 
 // MasterChef is the master of Blzd. He can make Blzd and he is a fair guy.
 //
@@ -47,7 +47,7 @@ contract MasterChef is Ownable {
     }
 
     // The Blzd TOKEN!
-    BlzdToken public blzd;
+    HonorToken public blzd;
     // Dev address.
     address public devaddr;
     // Blzd tokens created per block.
@@ -72,7 +72,7 @@ contract MasterChef is Ownable {
     event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 amount);
 
     constructor(
-        BlzdToken _blzd,
+        HonorToken _blzd,
         address _devaddr,
         uint256 _blzdPerBlock,
         uint256 _startBlock

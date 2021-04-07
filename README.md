@@ -1,2 +1,2 @@
-# blzd-contracts
-contracts for blizzard.money
+# samuri-contracts
+contracts for samurai.honor

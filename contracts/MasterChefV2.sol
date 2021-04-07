@@ -8,7 +8,7 @@ import "./libs/SafeBEP20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-import "./BlzdToken.sol";
+import "./HonorToken.sol";
 
 // MasterChef is the master of BLZD. He can make BLZD and he is a fair guy.
 //
@@ -48,7 +48,7 @@ contract MasterChefV2 is Ownable, ReentrancyGuard {
     }
 
     // The BLZD TOKEN!
-    BlzdToken public blzd;
+    HonorToken public blzd;
     // Dev address.
     address public devaddr;
     // BLZD tokens created per block.
@@ -77,7 +77,7 @@ contract MasterChefV2 is Ownable, ReentrancyGuard {
     event UpdateEmissionRate(address indexed user, uint256 blzdPerBlock);
 
     constructor(
-        BlzdToken _blzd,
+        HonorToken _blzd,
         address _devaddr,
         uint256 _blzdPerBlock,
         uint256 _startBlock
